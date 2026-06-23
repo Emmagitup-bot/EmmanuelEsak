@@ -1,0 +1,348 @@
+/* --- Global Theme Colors & Page Settings --- */
+:root {
+  --bg-cream: #FCF8F5;
+  --card-bg: transparent; /* No background wrapper for the whole card */
+  --accent-red: #C73B0F;   /* The red/orange theme from your image */
+  --text-dark: #26201E;
+  --text-muted: #877771;
+  --border-light: #EADBC8;
+  --font-stack: system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-stack);
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  padding: 20px;
+}
+
+.main-header {
+  max-width: 1200px;
+  margin: 20px auto 30px auto;
+}
+
+.main-header h1 {
+  font-size: 2.2rem;
+  color: var(--text-dark);
+}
+
+/* --- Layout Grid --- */
+.shop-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+/* --- Product Card & Center Border Image Button Placement --- */
+.product-card {
+  background-color: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 25px; /* Creates explicit empty room below image for button layout overflow */
+}
+
+.product-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+/* Active Class matching Image 2 when selected */
+.product-img.active-border {
+  border-color: var(--accent-red);
+}
+
+/* Forces container button to lock horizontally onto center of image baseline boundary */
+.action-btn-placeholder {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 160px; /* Locked pill dimensions */
+  height: 42px;
+  z-index: 5;
+}
+
+/* --- Image 1 Style: Plain Add To Cart State --- */
+.add-to-basket-btn {
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+  border: 1px solid var(--text-muted);
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.add-to-basket-btn:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+/* Simple inline cart svg icon mimicry */
+.add-to-basket-btn::before {
+  content: "🛒"; 
+  font-size: 0.95rem;
+}
+
+/* --- Image 2 Style: Active Increment Controller Panels --- */
+.quantity-control-panel {
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-red);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 25px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.quantity-control-panel button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.quantity-control-panel button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Typography Info Elements --- */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-category {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.info-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.info-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-red);
+}
+
+/* --- Sidebar Basket System Card --- */
+.basket-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.basket-card h3 {
+  color: var(--accent-red);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+#total-qty-badge {
+  font-weight: bold;
+}
+
+.empty-basket-view {
+  text-align: center;
+  padding: 20px 0;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+/* List Formatting */
+#basket-items-list {
+  list-style: none;
+}
+
+.basket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #F4F1F0;
+}
+
+.math-qty {
+  color: var(--accent-red);
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.math-each {
+  color: var(--text-muted);
+  margin-right: 8px;
+}
+
+.remove-item-btn {
+  background: transparent;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-item-btn:hover {
+  border-color: var(--text-dark);
+  color: var(--text-dark);
+}
+
+.basket-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.grand-total-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.primary-btn {
+  width: 100%;
+  background-color: var(--accent-red);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* --- Toast Notification Alert --- */
+.toast-alert {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: var(--text-dark);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  z-index: 1000;
+}
+
+/* --- Checkout Confirmation Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+}
+
+.modal-receipt {
+  background-color: var(--bg-cream);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #F4F1F0;
+}
+
+.receipt-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
+/* Hidden Utility State Class */
+.hidden {
+  display: none !important;
+}
+
+/* --- Viewport Media Targets --- */
+@media (min-width: 768px) {
+  body { padding: 40px; }
+  .shop-container {
+    grid-template-columns: 1fr 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shop-container {
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+  }
+}
